@@ -1,0 +1,592 @@
+{
+  "proofs": {
+    "sync_fifo": {
+      "rows": {
+        "h_tracker_inv": [
+          "lemma",
+          "proved (1-induction)"
+        ],
+        "a_count_range": [
+          "assert",
+          "proved (1-induction, lemmas assumed)"
+        ],
+        "a_full_flag": [
+          "assert",
+          "proved (1-induction, lemmas assumed)"
+        ],
+        "a_empty_flag": [
+          "assert",
+          "proved (1-induction, lemmas assumed)"
+        ],
+        "a_count_up": [
+          "assert",
+          "proved (1-induction, lemmas assumed)"
+        ],
+        "a_count_down": [
+          "assert",
+          "proved (1-induction, lemmas assumed)"
+        ],
+        "a_count_hold": [
+          "assert",
+          "proved (1-induction, lemmas assumed)"
+        ],
+        "a_reset": [
+          "assert",
+          "proved (1-induction, lemmas assumed)"
+        ],
+        "a_track_inside": [
+          "assert",
+          "proved (1-induction, lemmas assumed)"
+        ],
+        "a_data_order": [
+          "assert",
+          "proved (1-induction, lemmas assumed)"
+        ],
+        "c_full": [
+          "cover",
+          "covered at cycle 5"
+        ],
+        "c_full_to_empty": [
+          "cover",
+          "covered at cycle 9"
+        ],
+        "c_push_pop_full": [
+          "cover",
+          "covered at cycle 5"
+        ],
+        "c_rd_wrap": [
+          "cover",
+          "covered at cycle 9"
+        ],
+        "c_track_deep": [
+          "cover",
+          "covered at cycle 5"
+        ],
+        "c_track_out": [
+          "cover",
+          "covered at cycle 2"
+        ]
+      },
+      "timing": {
+        "lemmas": 0.37486059599905275,
+        "asserts": 0.3000658079981804,
+        "bmc": 9.177943538015825
+      }
+    },
+    "rr_arbiter": {
+      "rows": {
+        "a_one_grant": [
+          "assert",
+          "proved (3-induction)"
+        ],
+        "a_only_req": [
+          "assert",
+          "proved (3-induction)"
+        ],
+        "a_work_cons": [
+          "assert",
+          "proved (3-induction)"
+        ],
+        "a_wait_bound": [
+          "assert",
+          "proved (3-induction)"
+        ],
+        "a_eventually": [
+          "assert",
+          "bounded: holds to cycle 12"
+        ],
+        "c_wait_max": [
+          "cover",
+          "covered at cycle 4"
+        ],
+        "c_all_req": [
+          "cover",
+          "covered at cycle 1"
+        ],
+        "c_wrap": [
+          "cover",
+          "covered at cycle 2"
+        ]
+      },
+      "timing": {
+        "asserts": 0.17554294399451464,
+        "bmc": 2.1935348190017976
+      }
+    },
+    "skid_buffer": {
+      "rows": {
+        "h_skid_inv": [
+          "lemma",
+          "proved (1-induction)"
+        ],
+        "a_down_hold": [
+          "assert",
+          "proved (1-induction, lemmas assumed)"
+        ],
+        "a_reset": [
+          "assert",
+          "proved (1-induction, lemmas assumed)"
+        ],
+        "a_occ_max": [
+          "assert",
+          "proved (1-induction, lemmas assumed)"
+        ],
+        "a_ready": [
+          "assert",
+          "proved (1-induction, lemmas assumed)"
+        ],
+        "a_valid": [
+          "assert",
+          "proved (1-induction, lemmas assumed)"
+        ],
+        "a_no_bubble": [
+          "assert",
+          "proved (1-induction, lemmas assumed)"
+        ],
+        "a_track_inside": [
+          "assert",
+          "proved (1-induction, lemmas assumed)"
+        ],
+        "a_data_order": [
+          "assert",
+          "proved (1-induction, lemmas assumed)"
+        ],
+        "c_skid_used": [
+          "cover",
+          "covered at cycle 2"
+        ],
+        "c_full": [
+          "cover",
+          "covered at cycle 3"
+        ],
+        "c_stream": [
+          "cover",
+          "covered at cycle 5"
+        ],
+        "c_src_waits": [
+          "cover",
+          "covered at cycle 4"
+        ],
+        "c_track_skid": [
+          "cover",
+          "covered at cycle 3"
+        ],
+        "c_track_out": [
+          "cover",
+          "covered at cycle 2"
+        ]
+      },
+      "timing": {
+        "lemmas": 0.33333911999943666,
+        "asserts": 0.2954867530061165,
+        "bmc": 3.554073455023172
+      }
+    }
+  },
+  "bugs": [
+    {
+      "id": "fifo_full_early",
+      "block": "sync_fifo",
+      "what": "full raised one entry early, so the last slot is never used",
+      "caught": true,
+      "failed": [
+        [
+          "a_full_flag",
+          4
+        ]
+      ],
+      "seconds": 5.43
+    },
+    {
+      "id": "fifo_no_overflow_guard",
+      "block": "sync_fifo",
+      "what": "a push while full is accepted and overwrites the oldest entry",
+      "caught": true,
+      "failed": [
+        [
+          "a_count_down",
+          6
+        ],
+        [
+          "a_count_hold",
+          6
+        ],
+        [
+          "a_count_range",
+          6
+        ],
+        [
+          "a_data_order",
+          6
+        ],
+        [
+          "h_tracker_inv",
+          6
+        ],
+        [
+          "a_track_inside",
+          9
+        ]
+      ],
+      "seconds": 4.09
+    },
+    {
+      "id": "fifo_empty_ignores_wrap",
+      "block": "sync_fifo",
+      "what": "empty compares pointers without the wrap bit, so a full FIFO looks empty",
+      "caught": true,
+      "failed": [
+        [
+          "a_empty_flag",
+          5
+        ]
+      ],
+      "seconds": 5.55
+    },
+    {
+      "id": "fifo_rd_wrap_bit_stuck",
+      "block": "sync_fifo",
+      "what": "read pointer increments without carrying into the wrap bit",
+      "caught": true,
+      "failed": [
+        [
+          "a_count_down",
+          6
+        ],
+        [
+          "a_count_hold",
+          6
+        ],
+        [
+          "a_count_range",
+          6
+        ],
+        [
+          "h_tracker_inv",
+          6
+        ],
+        [
+          "a_track_inside",
+          9
+        ],
+        [
+          "a_data_order",
+          10
+        ]
+      ],
+      "seconds": 4.15
+    },
+    {
+      "id": "fifo_write_wrong_slot",
+      "block": "sync_fifo",
+      "what": "push writes at the read pointer instead of the write pointer",
+      "caught": true,
+      "failed": [
+        [
+          "a_data_order",
+          3
+        ],
+        [
+          "h_tracker_inv",
+          3
+        ]
+      ],
+      "seconds": 4.36
+    },
+    {
+      "id": "arb_fixed_priority",
+      "block": "rr_arbiter",
+      "what": "priority never rotates, so it is a fixed-priority arbiter",
+      "caught": true,
+      "failed": [
+        [
+          "a_wait_bound",
+          4
+        ],
+        [
+          "a_eventually",
+          6
+        ]
+      ],
+      "seconds": 2.15
+    },
+    {
+      "id": "arb_winner_keeps_priority",
+      "block": "rr_arbiter",
+      "what": "mask keeps the winner, so a requester that keeps asking wins every time",
+      "caught": true,
+      "failed": [
+        [
+          "a_wait_bound",
+          4
+        ],
+        [
+          "a_eventually",
+          6
+        ]
+      ],
+      "seconds": 2.16
+    },
+    {
+      "id": "arb_no_lowest_bit",
+      "block": "rr_arbiter",
+      "what": "every candidate is granted instead of only the lowest",
+      "caught": true,
+      "failed": [
+        [
+          "a_one_grant",
+          1
+        ]
+      ],
+      "seconds": 2.2
+    },
+    {
+      "id": "arb_no_wrap",
+      "block": "rr_arbiter",
+      "what": "no fallback to the full request vector, so the search never wraps",
+      "caught": true,
+      "failed": [
+        [
+          "a_work_cons",
+          2
+        ],
+        [
+          "a_wait_bound",
+          5
+        ],
+        [
+          "a_eventually",
+          7
+        ]
+      ],
+      "seconds": 2.14
+    },
+    {
+      "id": "skid_accept_without_ready",
+      "block": "skid_buffer",
+      "what": "stalled path captures s_data on s_valid alone, ignoring s_ready",
+      "caught": true,
+      "failed": [
+        [
+          "h_skid_inv",
+          4
+        ],
+        [
+          "a_data_order",
+          5
+        ]
+      ],
+      "seconds": 3.51
+    },
+    {
+      "id": "skid_output_changes_in_stall",
+      "block": "skid_buffer",
+      "what": "output data is overwritten while the downstream is stalled",
+      "caught": true,
+      "failed": [
+        [
+          "a_data_order",
+          3
+        ],
+        [
+          "a_down_hold",
+          3
+        ],
+        [
+          "h_skid_inv",
+          3
+        ]
+      ],
+      "seconds": 3.49
+    },
+    {
+      "id": "skid_ready_from_m_valid",
+      "block": "skid_buffer",
+      "what": "s_ready derived from m_valid: correct data, but half throughput",
+      "caught": true,
+      "failed": [
+        [
+          "a_no_bubble",
+          2
+        ],
+        [
+          "a_ready",
+          2
+        ],
+        [
+          "a_valid",
+          3
+        ],
+        [
+          "h_skid_inv",
+          3
+        ],
+        [
+          "a_occ_max",
+          4
+        ]
+      ],
+      "seconds": 3.57
+    },
+    {
+      "id": "skid_never_clears",
+      "block": "skid_buffer",
+      "what": "skid register not cleared after its beat moves out, so it is sent twice",
+      "caught": true,
+      "failed": [
+        [
+          "a_no_bubble",
+          4
+        ],
+        [
+          "a_ready",
+          4
+        ],
+        [
+          "h_skid_inv",
+          4
+        ],
+        [
+          "a_valid",
+          5
+        ],
+        [
+          "a_occ_max",
+          6
+        ]
+      ],
+      "seconds": 3.68
+    },
+    {
+      "id": "skid_unparks_wrong_data",
+      "block": "skid_buffer",
+      "what": "unparking moves s_data to the output instead of the parked beat",
+      "caught": true,
+      "failed": [
+        [
+          "a_data_order",
+          4
+        ],
+        [
+          "h_skid_inv",
+          4
+        ]
+      ],
+      "seconds": 3.3
+    }
+  ],
+  "study": [
+    {
+      "depth": 4,
+      "storage_bits": 32,
+      "with_lemma": "proved",
+      "with_lemma_seconds": 0.42,
+      "without_lemma": {
+        "1": [
+          "inconclusive",
+          0.02
+        ],
+        "2": [
+          "inconclusive",
+          0.03
+        ],
+        "4": [
+          "inconclusive",
+          0.07
+        ],
+        "8": [
+          "inconclusive",
+          0.11
+        ],
+        "16": [
+          "inconclusive",
+          1.83
+        ]
+      }
+    },
+    {
+      "depth": 16,
+      "storage_bits": 128,
+      "with_lemma": "proved",
+      "with_lemma_seconds": 0.58,
+      "without_lemma": {
+        "1": [
+          "inconclusive",
+          0.06
+        ],
+        "2": [
+          "inconclusive",
+          0.07
+        ],
+        "4": [
+          "inconclusive",
+          0.1
+        ],
+        "8": [
+          "inconclusive",
+          0.14
+        ],
+        "16": [
+          "inconclusive",
+          1.24
+        ]
+      }
+    },
+    {
+      "depth": 64,
+      "storage_bits": 512,
+      "with_lemma": "proved",
+      "with_lemma_seconds": 1.54,
+      "without_lemma": {
+        "1": [
+          "inconclusive",
+          0.13
+        ],
+        "2": [
+          "inconclusive",
+          0.16
+        ],
+        "4": [
+          "inconclusive",
+          0.22
+        ],
+        "8": [
+          "inconclusive",
+          0.44
+        ],
+        "16": [
+          "inconclusive",
+          2.11
+        ]
+      }
+    },
+    {
+      "depth": 256,
+      "storage_bits": 2048,
+      "with_lemma": "proved",
+      "with_lemma_seconds": 9.4,
+      "without_lemma": {
+        "1": [
+          "inconclusive",
+          0.64
+        ],
+        "2": [
+          "inconclusive",
+          0.83
+        ],
+        "4": [
+          "inconclusive",
+          1.22
+        ],
+        "8": [
+          "inconclusive",
+          2.16
+        ],
+        "16": [
+          "inconclusive",
+          6.01
+        ]
+      }
+    }
+  ]
+}

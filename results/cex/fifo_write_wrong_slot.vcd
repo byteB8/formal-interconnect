@@ -1,0 +1,124 @@
+$date
+  Thu Oct  8 00:31:23 2026
+$end
+$timescale
+  1ns
+$end
+$scope module sync_fifo_fv $end
+  $var wire 32 sync_fifo_fv.WIDTH WIDTH [31:0] $end
+  $var wire 32 sync_fifo_fv.DEPTH DEPTH [31:0] $end
+  $var wire 1 sync_fifo_fv.clk clk [0:0] $end
+  $var wire 1 sync_fifo_fv.rst rst [0:0] $end
+  $var wire 1 sync_fifo_fv.push push [0:0] $end
+  $var wire 8 sync_fifo_fv.push_data push_data [7:0] $end
+  $var wire 1 sync_fifo_fv.pop pop [0:0] $end
+  $var wire 1 sync_fifo_fv.track track [0:0] $end
+  $var integer 32 sync_fifo_fv.AW AW $end
+  $var wire 32 sync_fifo_fv.CW CW [31:0] $end
+  $var wire 1 sync_fifo_fv.full full [0:0] $end
+  $var wire 1 sync_fifo_fv.empty empty [0:0] $end
+  $var wire 8 sync_fifo_fv.pop_data pop_data [7:0] $end
+  $var wire 3 sync_fifo_fv.count count [2:0] $end
+  $var wire 1 sync_fifo_fv.push_ok push_ok [0:0] $end
+  $var wire 1 sync_fifo_fv.pop_ok pop_ok [0:0] $end
+  $var reg 1 sync_fifo_fv.tracking tracking [0:0] $end
+  $var reg 8 sync_fifo_fv.tracked tracked [7:0] $end
+  $var reg 3 sync_fifo_fv.ahead ahead [2:0] $end
+  $scope module dut $end
+    $var wire 32 sync_fifo_fv.dut.WIDTH WIDTH [31:0] $end
+    $var wire 32 sync_fifo_fv.dut.DEPTH DEPTH [31:0] $end
+    $var wire 1 sync_fifo_fv.dut.clk clk [0:0] $end
+    $var wire 1 sync_fifo_fv.dut.rst rst [0:0] $end
+    $var wire 1 sync_fifo_fv.dut.push push [0:0] $end
+    $var wire 8 sync_fifo_fv.dut.push_data push_data [7:0] $end
+    $var wire 1 sync_fifo_fv.dut.full full [0:0] $end
+    $var wire 1 sync_fifo_fv.dut.pop pop [0:0] $end
+    $var wire 8 sync_fifo_fv.dut.pop_data pop_data [7:0] $end
+    $var wire 1 sync_fifo_fv.dut.empty empty [0:0] $end
+    $var wire 3 sync_fifo_fv.dut.count count [2:0] $end
+    $var integer 32 sync_fifo_fv.dut.AW AW $end
+    $var reg 32 sync_fifo_fv.dut.mem mem [0:3][7:0] $end
+    $var reg 3 sync_fifo_fv.dut.wr_ptr wr_ptr [2:0] $end
+    $var reg 3 sync_fifo_fv.dut.rd_ptr rd_ptr [2:0] $end
+    $var wire 1 sync_fifo_fv.dut.do_push do_push [0:0] $end
+    $var wire 1 sync_fifo_fv.dut.do_pop do_pop [0:0] $end
+  $upscope $end
+$upscope $end
+$enddefinitions $end
+#0
+b00000000000000000000000000001000 sync_fifo_fv.WIDTH
+b00000000000000000000000000000100 sync_fifo_fv.DEPTH
+b0 sync_fifo_fv.clk
+b1 sync_fifo_fv.rst
+b0 sync_fifo_fv.push
+b00000000 sync_fifo_fv.push_data
+b0 sync_fifo_fv.pop
+b0 sync_fifo_fv.track
+b00000000000000000000000000000010 sync_fifo_fv.AW
+b00000000000000000000000000000011 sync_fifo_fv.CW
+b0 sync_fifo_fv.full
+b0 sync_fifo_fv.empty
+b00001000 sync_fifo_fv.pop_data
+b110 sync_fifo_fv.count
+b0 sync_fifo_fv.push_ok
+b0 sync_fifo_fv.pop_ok
+b0 sync_fifo_fv.tracking
+b00000000 sync_fifo_fv.tracked
+b000 sync_fifo_fv.ahead
+b00000000000000000000000000001000 sync_fifo_fv.dut.WIDTH
+b00000000000000000000000000000100 sync_fifo_fv.dut.DEPTH
+b0 sync_fifo_fv.dut.clk
+b1 sync_fifo_fv.dut.rst
+b0 sync_fifo_fv.dut.push
+b00000000 sync_fifo_fv.dut.push_data
+b0 sync_fifo_fv.dut.full
+b0 sync_fifo_fv.dut.pop
+b00001000 sync_fifo_fv.dut.pop_data
+b0 sync_fifo_fv.dut.empty
+b110 sync_fifo_fv.dut.count
+b00000000000000000000000000000010 sync_fifo_fv.dut.AW
+b00000000000001000000100000101000 sync_fifo_fv.dut.mem
+b000 sync_fifo_fv.dut.wr_ptr
+b010 sync_fifo_fv.dut.rd_ptr
+b0 sync_fifo_fv.dut.do_push
+b0 sync_fifo_fv.dut.do_pop
+#1
+b0 sync_fifo_fv.rst
+b1 sync_fifo_fv.push
+b10000011 sync_fifo_fv.push_data
+b1 sync_fifo_fv.track
+b1 sync_fifo_fv.empty
+b00000000 sync_fifo_fv.pop_data
+b000 sync_fifo_fv.count
+b1 sync_fifo_fv.push_ok
+b0 sync_fifo_fv.dut.rst
+b1 sync_fifo_fv.dut.push
+b10000011 sync_fifo_fv.dut.push_data
+b00000000 sync_fifo_fv.dut.pop_data
+b1 sync_fifo_fv.dut.empty
+b000 sync_fifo_fv.dut.count
+b000 sync_fifo_fv.dut.rd_ptr
+b1 sync_fifo_fv.dut.do_push
+#2
+b00000100 sync_fifo_fv.push_data
+b0 sync_fifo_fv.empty
+b10000011 sync_fifo_fv.pop_data
+b001 sync_fifo_fv.count
+b1 sync_fifo_fv.tracking
+b10000011 sync_fifo_fv.tracked
+b00000100 sync_fifo_fv.dut.push_data
+b10000011 sync_fifo_fv.dut.pop_data
+b0 sync_fifo_fv.dut.empty
+b001 sync_fifo_fv.dut.count
+b10000011000001000000100000101000 sync_fifo_fv.dut.mem
+b001 sync_fifo_fv.dut.wr_ptr
+#3
+b00000000 sync_fifo_fv.push_data
+b0 sync_fifo_fv.track
+b00000100 sync_fifo_fv.pop_data
+b010 sync_fifo_fv.count
+b00000000 sync_fifo_fv.dut.push_data
+b00000100 sync_fifo_fv.dut.pop_data
+b010 sync_fifo_fv.dut.count
+b00000100000001000000100000101000 sync_fifo_fv.dut.mem
+b010 sync_fifo_fv.dut.wr_ptr

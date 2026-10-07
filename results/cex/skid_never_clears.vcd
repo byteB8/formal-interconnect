@@ -1,0 +1,119 @@
+$date
+  Thu Oct  8 00:31:47 2026
+$end
+$timescale
+  1ns
+$end
+$scope module skid_buffer_fv $end
+  $var wire 32 skid_buffer_fv.WIDTH WIDTH [31:0] $end
+  $var wire 1 skid_buffer_fv.clk clk [0:0] $end
+  $var wire 1 skid_buffer_fv.rst rst [0:0] $end
+  $var wire 1 skid_buffer_fv.src_valid src_valid [0:0] $end
+  $var wire 8 skid_buffer_fv.src_data src_data [7:0] $end
+  $var wire 1 skid_buffer_fv.m_ready m_ready [0:0] $end
+  $var wire 1 skid_buffer_fv.track track [0:0] $end
+  $var wire 1 skid_buffer_fv.s_valid s_valid [0:0] $end
+  $var wire 1 skid_buffer_fv.s_ready s_ready [0:0] $end
+  $var wire 8 skid_buffer_fv.s_data s_data [7:0] $end
+  $var wire 1 skid_buffer_fv.m_valid m_valid [0:0] $end
+  $var wire 8 skid_buffer_fv.m_data m_data [7:0] $end
+  $var reg 1 skid_buffer_fv.held_q held_q [0:0] $end
+  $var reg 8 skid_buffer_fv.held_data_q held_data_q [7:0] $end
+  $var wire 1 skid_buffer_fv.s_fire s_fire [0:0] $end
+  $var wire 1 skid_buffer_fv.m_fire m_fire [0:0] $end
+  $var reg 3 skid_buffer_fv.occ occ [2:0] $end
+  $var reg 1 skid_buffer_fv.tracking tracking [0:0] $end
+  $var reg 8 skid_buffer_fv.tracked tracked [7:0] $end
+  $var reg 3 skid_buffer_fv.ahead ahead [2:0] $end
+  $scope module dut $end
+    $var wire 32 skid_buffer_fv.dut.WIDTH WIDTH [31:0] $end
+    $var wire 1 skid_buffer_fv.dut.clk clk [0:0] $end
+    $var wire 1 skid_buffer_fv.dut.rst rst [0:0] $end
+    $var wire 1 skid_buffer_fv.dut.s_valid s_valid [0:0] $end
+    $var wire 1 skid_buffer_fv.dut.s_ready s_ready [0:0] $end
+    $var wire 8 skid_buffer_fv.dut.s_data s_data [7:0] $end
+    $var reg 1 skid_buffer_fv.dut.m_valid m_valid [0:0] $end
+    $var wire 1 skid_buffer_fv.dut.m_ready m_ready [0:0] $end
+    $var reg 8 skid_buffer_fv.dut.m_data m_data [7:0] $end
+    $var reg 1 skid_buffer_fv.dut.skid_valid skid_valid [0:0] $end
+    $var reg 8 skid_buffer_fv.dut.skid_data skid_data [7:0] $end
+    $var wire 1 skid_buffer_fv.dut.s_fire s_fire [0:0] $end
+    $var wire 1 skid_buffer_fv.dut.m_stall m_stall [0:0] $end
+  $upscope $end
+$upscope $end
+$enddefinitions $end
+#0
+b00000000000000000000000000001000 skid_buffer_fv.WIDTH
+b0 skid_buffer_fv.clk
+b1 skid_buffer_fv.rst
+b0 skid_buffer_fv.src_valid
+b00000000 skid_buffer_fv.src_data
+b1 skid_buffer_fv.m_ready
+b0 skid_buffer_fv.track
+b0 skid_buffer_fv.s_valid
+b1 skid_buffer_fv.s_ready
+b00000000 skid_buffer_fv.s_data
+b1 skid_buffer_fv.m_valid
+b00000000 skid_buffer_fv.m_data
+b0 skid_buffer_fv.held_q
+b00000000 skid_buffer_fv.held_data_q
+b0 skid_buffer_fv.s_fire
+b1 skid_buffer_fv.m_fire
+b000 skid_buffer_fv.occ
+b0 skid_buffer_fv.tracking
+b00000000 skid_buffer_fv.tracked
+b000 skid_buffer_fv.ahead
+b00000000000000000000000000001000 skid_buffer_fv.dut.WIDTH
+b0 skid_buffer_fv.dut.clk
+b1 skid_buffer_fv.dut.rst
+b0 skid_buffer_fv.dut.s_valid
+b1 skid_buffer_fv.dut.s_ready
+b00000000 skid_buffer_fv.dut.s_data
+b1 skid_buffer_fv.dut.m_valid
+b1 skid_buffer_fv.dut.m_ready
+b00000000 skid_buffer_fv.dut.m_data
+b0 skid_buffer_fv.dut.skid_valid
+b00000000 skid_buffer_fv.dut.skid_data
+b0 skid_buffer_fv.dut.s_fire
+b0 skid_buffer_fv.dut.m_stall
+#1
+b0 skid_buffer_fv.rst
+b1 skid_buffer_fv.src_valid
+b0 skid_buffer_fv.m_ready
+b1 skid_buffer_fv.s_valid
+b0 skid_buffer_fv.m_valid
+b1 skid_buffer_fv.s_fire
+b0 skid_buffer_fv.m_fire
+b0 skid_buffer_fv.dut.rst
+b1 skid_buffer_fv.dut.s_valid
+b0 skid_buffer_fv.dut.m_valid
+b0 skid_buffer_fv.dut.m_ready
+b1 skid_buffer_fv.dut.s_fire
+#2
+b1 skid_buffer_fv.m_valid
+b001 skid_buffer_fv.occ
+b1 skid_buffer_fv.dut.m_valid
+b1 skid_buffer_fv.dut.m_stall
+#3
+b0 skid_buffer_fv.src_valid
+b1 skid_buffer_fv.m_ready
+b0 skid_buffer_fv.s_valid
+b0 skid_buffer_fv.s_ready
+b0 skid_buffer_fv.s_fire
+b1 skid_buffer_fv.m_fire
+b010 skid_buffer_fv.occ
+b0 skid_buffer_fv.dut.s_valid
+b0 skid_buffer_fv.dut.s_ready
+b1 skid_buffer_fv.dut.m_ready
+b1 skid_buffer_fv.dut.skid_valid
+b0 skid_buffer_fv.dut.s_fire
+b0 skid_buffer_fv.dut.m_stall
+#4
+b1 skid_buffer_fv.src_valid
+b0 skid_buffer_fv.m_ready
+b1 skid_buffer_fv.s_valid
+b0 skid_buffer_fv.m_fire
+b001 skid_buffer_fv.occ
+b1 skid_buffer_fv.dut.s_valid
+b0 skid_buffer_fv.dut.m_ready
+b1 skid_buffer_fv.dut.m_stall

@@ -1,0 +1,108 @@
+# Seeded bugs. `scripts/fv.py bugs` applies each one to a copy of the RTL
+# (`find` must occur exactly once in the block's file) and runs bounded model
+# checking; a bug counts as caught when a specification assertion (a_) fails.
+# Each is a mistake a designer could plausibly make, not a random mutation.
+
+# --- sync_fifo ---------------------------------------------------------------
+
+[[bug]]
+id = "fifo_full_early"
+block = "sync_fifo"
+what = "full raised one entry early, so the last slot is never used"
+find = "assign full     = (wr_ptr == {~rd_ptr[AW], rd_ptr[AW-1:0]});"
+replace = "assign full     = (count >= DEPTH - 1);"
+
+[[bug]]
+id = "fifo_no_overflow_guard"
+block = "sync_fifo"
+what = "a push while full is accepted and overwrites the oldest entry"
+find = "assign do_push = push && !full;"
+replace = "assign do_push = push;"
+
+[[bug]]
+id = "fifo_empty_ignores_wrap"
+block = "sync_fifo"
+what = "empty compares pointers without the wrap bit, so a full FIFO looks empty"
+find = "assign empty    = (wr_ptr == rd_ptr);"
+replace = "assign empty    = (wr_ptr[AW-1:0] == rd_ptr[AW-1:0]);"
+
+[[bug]]
+id = "fifo_rd_wrap_bit_stuck"
+block = "sync_fifo"
+what = "read pointer increments without carrying into the wrap bit"
+find = "if (do_pop)  rd_ptr <= rd_ptr + 1'b1;"
+replace = "if (do_pop)  rd_ptr <= {rd_ptr[AW], rd_ptr[AW-1:0] + 1'b1};"
+
+[[bug]]
+id = "fifo_write_wrong_slot"
+block = "sync_fifo"
+what = "push writes at the read pointer instead of the write pointer"
+find = "mem[wr_ptr[AW-1:0]] <= push_data;"
+replace = "mem[rd_ptr[AW-1:0]] <= push_data;"
+
+# --- rr_arbiter --------------------------------------------------------------
+
+[[bug]]
+id = "arb_fixed_priority"
+block = "rr_arbiter"
+what = "priority never rotates, so it is a fixed-priority arbiter"
+find = "else if (gnt != '0) mask_q <= ~((gnt << 1) - 1'b1);"
+replace = "else if (gnt != '0) mask_q <= '1;"
+
+[[bug]]
+id = "arb_winner_keeps_priority"
+block = "rr_arbiter"
+what = "mask keeps the winner, so a requester that keeps asking wins every time"
+find = "else if (gnt != '0) mask_q <= ~((gnt << 1) - 1'b1);"
+replace = "else if (gnt != '0) mask_q <= ~(gnt - 1'b1);"
+
+[[bug]]
+id = "arb_no_lowest_bit"
+block = "rr_arbiter"
+what = "every candidate is granted instead of only the lowest"
+find = "assign gnt        = candidates & (~candidates + 1'b1);"
+replace = "assign gnt        = candidates;"
+
+[[bug]]
+id = "arb_no_wrap"
+block = "rr_arbiter"
+what = "no fallback to the full request vector, so the search never wraps"
+find = "assign candidates = (masked != '0) ? masked : req;"
+replace = "assign candidates = masked;"
+
+# --- skid_buffer -------------------------------------------------------------
+
+[[bug]]
+id = "skid_accept_without_ready"
+block = "skid_buffer"
+what = "stalled path captures s_data on s_valid alone, ignoring s_ready"
+find = "if (s_fire) begin"
+replace = "if (s_valid) begin"
+
+[[bug]]
+id = "skid_output_changes_in_stall"
+block = "skid_buffer"
+what = "output data is overwritten while the downstream is stalled"
+find = "      if (s_fire) begin"
+replace = "      m_data <= s_data;\n      if (s_fire) begin"
+
+[[bug]]
+id = "skid_ready_from_m_valid"
+block = "skid_buffer"
+what = "s_ready derived from m_valid: correct data, but half throughput"
+find = "assign s_ready = !skid_valid;"
+replace = "assign s_ready = !m_valid;"
+
+[[bug]]
+id = "skid_never_clears"
+block = "skid_buffer"
+what = "skid register not cleared after its beat moves out, so it is sent twice"
+find = "      m_data     <= skid_data;\n      skid_valid <= 1'b0;"
+replace = "      m_data     <= skid_data;"
+
+[[bug]]
+id = "skid_unparks_wrong_data"
+block = "skid_buffer"
+what = "unparking moves s_data to the output instead of the parked beat"
+find = "      m_data     <= skid_data;"
+replace = "      m_data     <= s_data;"

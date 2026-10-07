@@ -1,0 +1,67 @@
+$date
+  Thu Oct  8 00:31:28 2026
+$end
+$timescale
+  1ns
+$end
+$scope module rr_arbiter_fv $end
+  $var wire 32 rr_arbiter_fv.N N [31:0] $end
+  $var wire 1 rr_arbiter_fv.clk clk [0:0] $end
+  $var wire 1 rr_arbiter_fv.rst rst [0:0] $end
+  $var wire 4 rr_arbiter_fv.req_in req_in [3:0] $end
+  $var wire 2 rr_arbiter_fv.idx_in idx_in [1:0] $end
+  $var integer 32 rr_arbiter_fv.IW IW $end
+  $var wire 32 rr_arbiter_fv.MAX_WAIT MAX_WAIT [31:0] $end
+  $var reg 4 rr_arbiter_fv.pending_q pending_q [3:0] $end
+  $var wire 4 rr_arbiter_fv.req req [3:0] $end
+  $var wire 4 rr_arbiter_fv.gnt gnt [3:0] $end
+  $var reg 2 rr_arbiter_fv.idx idx [1:0] $end
+  $scope module dut $end
+    $var wire 32 rr_arbiter_fv.dut.N N [31:0] $end
+    $var wire 1 rr_arbiter_fv.dut.clk clk [0:0] $end
+    $var wire 1 rr_arbiter_fv.dut.rst rst [0:0] $end
+    $var wire 4 rr_arbiter_fv.dut.req req [3:0] $end
+    $var wire 4 rr_arbiter_fv.dut.gnt gnt [3:0] $end
+    $var reg 4 rr_arbiter_fv.dut.mask_q mask_q [3:0] $end
+    $var wire 4 rr_arbiter_fv.dut.masked masked [3:0] $end
+    $var wire 4 rr_arbiter_fv.dut.candidates candidates [3:0] $end
+  $upscope $end
+$upscope $end
+$enddefinitions $end
+#0
+b00000000000000000000000000000100 rr_arbiter_fv.N
+b0 rr_arbiter_fv.clk
+b1 rr_arbiter_fv.rst
+b0000 rr_arbiter_fv.req_in
+b01 rr_arbiter_fv.idx_in
+b00000000000000000000000000000010 rr_arbiter_fv.IW
+b00000000000000000000000000000011 rr_arbiter_fv.MAX_WAIT
+b0000 rr_arbiter_fv.pending_q
+b0000 rr_arbiter_fv.req
+b0000 rr_arbiter_fv.gnt
+b01 rr_arbiter_fv.idx
+b00000000000000000000000000000100 rr_arbiter_fv.dut.N
+b0 rr_arbiter_fv.dut.clk
+b1 rr_arbiter_fv.dut.rst
+b0000 rr_arbiter_fv.dut.req
+b0000 rr_arbiter_fv.dut.gnt
+b0000 rr_arbiter_fv.dut.mask_q
+b0000 rr_arbiter_fv.dut.masked
+b0000 rr_arbiter_fv.dut.candidates
+#1
+b0 rr_arbiter_fv.rst
+b0011 rr_arbiter_fv.req_in
+b00 rr_arbiter_fv.idx_in
+b0011 rr_arbiter_fv.req
+b0001 rr_arbiter_fv.gnt
+b0 rr_arbiter_fv.dut.rst
+b0011 rr_arbiter_fv.dut.req
+b0001 rr_arbiter_fv.dut.gnt
+b1111 rr_arbiter_fv.dut.mask_q
+b0011 rr_arbiter_fv.dut.masked
+b0011 rr_arbiter_fv.dut.candidates
+#2
+b0001 rr_arbiter_fv.req_in
+b0010 rr_arbiter_fv.pending_q
+#3
+#4
